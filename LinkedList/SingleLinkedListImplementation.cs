@@ -21,6 +21,17 @@ namespace testConsole
                 Console.WriteLine($"DATA : {itr.current().data}");
             }
         }
+        public LinkedListNode Find(int _data)
+        {
+            for (LinkedListIterator itr = new LinkedListIterator(head); itr.current() != null; itr.next())
+            {
+                if (itr.current().data == _data)
+                {
+                    return itr.current();
+                }
+            }
+            return null;
+        }
         public void InsertLast(int _data)
         {
             LinkedListNode newNode = new LinkedListNode(_data);
@@ -32,6 +43,29 @@ namespace testConsole
             else
             {
                 tail.next = newNode;
+                tail = newNode;
+            }
+        }
+        public void InsertAfter(LinkedListNode node, int _data)
+        {
+            if (node == null) return;
+            LinkedListNode newNode = new LinkedListNode(_data);
+            newNode.next = node.next;
+            node.next = newNode;
+            if (newNode.next == null)
+            {
+                tail = newNode;
+            }
+        }
+        public void InsertAfter(int _existingData, int _newdata)
+        {
+            LinkedListNode node = Find(_existingData);
+            if (node == null) return;
+            LinkedListNode newNode = new LinkedListNode(_newdata);
+            newNode.next = node.next;
+            node.next = newNode;
+            if (newNode.next == null)
+            {
                 tail = newNode;
             }
         }
