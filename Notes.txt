@@ -1,0 +1,127 @@
+1 - Data & Memory
+	- in RAM the smallest unit of memory is a memory cell (SDRAM cell) composed of logic gates to represent
+		and save the elec pulse into it.
+	- 8 memory cells are composing a memory unit, (why 8?) -> nothing technical, IBM was the influencer in this.
+	- each a memory unit has a value and an address.
+	- memory is like a 8 col matric and each row is a 8bit memory cell, (mostlikely)
+	- there're more than addressing modes.
+	- there are more than one system (8-16-32-64)
+	- the address of each memory cell is not stored anywhere, the address is recognized by
+		a component in the memory called multiplexer. the multiplexer is been told to go to the memory store
+		and read from itr or write into it and he is the one meant to recognize where exactly in memory.
+		it is like a queue where u know the start and u know the index, viola.. now u know where is ur place in the queue
+		so, the addrss is the index of the memorycell location in the memory matrix.
+
+	- how to represent the data in the memory??
+		- Numbers : from decimal to binary and hexa and vice versa.
+		- Text : - ASCII (which has only english letters nad some special charachters)
+				 - UTF Encoding (which is containing the ASCII inside it as UTF has all letters
+					of all languages and all special chars)
+		- Colors : RBG and HEXA
+		- Pics : array of pixels and each picel has a color.
+
+*********************************************************************************
+2 - Memory & Data Type
+	- u need to know the limit f each datatype
+	- if a value takes more than byte in memory, the address of the value is the address 
+		of the first byte it takes
+	- a pointer is a datatype has its own address and its value is the address of the value of which it points to
+	- in c# it should be in unsafe code
+	- as we said the address of any value is not stored anywhere and it is detected and recognized by the multiplexer.
+		so, if u want to keep the address of some value, u use pointer to point at this value, it means that the pointer value
+		is the address u want to save (the address of the value)
+	- the address is the index of the memory location in the memory matrix 
+
+	- Stack :
+		- stack is just a memory like all the rest (just a matric of story units)
+		- stack is just a logical defintion, makes this piece of memory has a special treats
+		- the first thing special in the stack that it stores daqta continuously 
+		- each function creates its own stack frame [activaion record] (logical term), 
+			stores its variable and once it does its functionality and pops out.
+			and it takes the address of the first thing i write into it.
+			it acts as the LIFO (Last in is the First out)
+
+	- Heap :
+		- Heap is just a memory like all the rest (just a matric of story units)
+		- Heap is just a logical defintion, makes this piece of memory has a special treats
+		- the first thing special in the Heap that it stores data Randomly (the expected behavior of the memory)
+			wherever there's a space, store the data.
+		- heap stores some things depends on the language
+		- in c# (ref type objects) stored in the heap 
+		- a anything stored in heap, its address in the heap will be stored in the stack 
+		- if the address removed from stack, the object will be untracked and the Garbage collector in c# will remove it
+*********************************************************************************
+3 - Array
+	- array has items all with same datatype
+	- array could be stored in stack or heap 
+	- array when intialized, it books a specific size in memory (length of array * size of the datatype of array)
+		that's why it has a pre determined constant datatype
+	- when intialized it stores the default value of the datatype in all its items 
+	- I can access any item of it randomly, don't have to go through all pre items starting from first one
+		to access the desired item.
+	- array addres is the adress of the first item in the array.
+	- address of any item in the array = (array base adress + (single value stores count * index))
+	- array index starts from 0, zero based
+	- array can't edit its length.
+	- dynamic array can edit the array as it clone the array  into a new array with the new length.
+	- regular array is a row of cells
+	- Multi Dimentional array like 2d, 3d (pages)
+	- 2d array declaration int32[] arr = new int32[rowsCount, colsCounr]
+		size of the array is rowsCount * colsCount, access of the item with 2 indeces 
+		placed in the memory as [0,0],[0,1],[0,2],[1,0], [1,1], [1,2] 
+	- jagged array is an array of arrays 
+		int32[][] arr = new int[3][]
+		arr[0] = new int[3]
+		arr[1] = new int[2]
+		arr[2] = new int[4]
+		difference of jagged array and 2d(multi-Dimentional) array is the jagged array could have difference col number in each row
+		while the cols number in the 2d array is constant and pre-determined.
+		in c++ when u decalre an array, the default is the array in the stack, if u want to place the array in heap and the address in the stack memory 
+			u have to code this explicitly 
+		in c# the visca verse 
+		jagged array each item is an array so array, jagged array is stored in stack as refernece of items of arrays stored in heap.
+		
+	- Any Data structure has [infrastructure - operations]
+		infrastructure: how data stored in memory (consecutive or non-consecutive)
+		operations : what features it can offer to me when using it
+	- Array
+		infrastructure : consecutive data storage
+		opeartions :
+				get length
+				static operations : doesn't change the infrastructure of the data structure (length and structure of it)
+					travers => iterate in the items in the array (do whatever on each item)
+					get at  => access by index
+					set at  => access by index
+				dynamic operations : changes the infrastructure of the data structure (length and structure of it)
+					increasing length:
+						insert at
+						insert first
+						insert last
+					decreasing length:
+						delete at
+						delete first
+						delete last
+		- infrastructure is the compiler responsability
+			c# asks compiler that asks the os that asks cpu to create an array with a size
+		- operations is our responsability
+			c# wraps the functionality with adds on in a helper class system.array
+			.resize(int newsize)
+			copy(to another array)
+			clone(create a new array)
+			getValue
+			setValue
+			binarysearch
+			convertall(from type to another type)
+			exists
+			fill
+			find
+			findAll
+			FindIndex
+			FindLast
+			FindLastIndex
+			ForEach
+			IndexOf
+			LastIndexOf
+			Reverse
+			Sort
+ *********************************************************************************
