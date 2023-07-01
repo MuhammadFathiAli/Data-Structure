@@ -8,8 +8,8 @@ namespace testConsole
 {
     public class LinkedList
     {
-        LinkedListNode head;
-        LinkedListNode tail;
+        public LinkedListNode head { get; private set; }
+        public LinkedListNode tail { get; private set; }
 
         public LinkedListIterator begin()
         {
@@ -126,7 +126,59 @@ namespace testConsole
             }
         }
 
-
+        public void deleteNode(LinkedListNode node)
+        {
+            if (node == null) return;
+            if (head == tail)
+            {
+                head = null;
+                tail = null;
+            }
+            else if (head == node)
+            {
+                head = node.next;
+            }
+            else
+            {
+                LinkedListNode parentNode = FindParentNode(node);
+                if (tail == node)
+                {
+                    tail = parentNode;
+                    parentNode.next = null;
+                }
+                else
+                {
+                    parentNode.next = node.next;
+                }
+            }
+        }
+        public void deleteNode(int _existingData)
+        {
+            LinkedListNode node = FindNode(_existingData);
+            if (node == null) return;
+            if (head == tail)
+            {
+                head = null;
+                tail = null;
+            }
+            else if (head == node)
+            {
+                head = node.next;
+            }
+            else
+            {
+                LinkedListNode parentNode = FindParentNode(node);
+                if (tail == node)
+                {
+                    tail = parentNode;
+                    parentNode.next = null;
+                }
+                else
+                {
+                    parentNode.next = node.next;
+                }
+            }
+        }
     }
     public class LinkedListNode
     {
