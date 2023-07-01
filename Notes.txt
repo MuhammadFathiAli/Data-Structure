@@ -125,3 +125,37 @@
 			Reverse
 			Sort
  *********************************************************************************
+ 4 - Linked List 
+	- linked list is a series of nodes 
+	- each node is an object carrying 2 props (data with any data type, pointer points to the next node)
+	- there's a head node as the start of the node 
+	- there's an iterator that iterates class
+		conecpt : i need an iterator that i can place it in loop, so that it can iterate on the collection items
+					it's implementation differ depending on the data strcture of the collection 
+						in linkedList its functionality
+								- get currentNode (whole Node [Data-NextPointer])
+								- go Next
+								- get Data only from the current Node
+						and u can add what so ever, as it is a helper calss, u can modeify it upon ur needs
+	Infrastructure : 
+		Independent and NonConsecutive memory stores. (differ than array).
+		can't access any node directly, have to start with the first and it leads me to the next 
+		each node has more data than array, it stores the data and the pointer to the next node
+	Operations : 
+		sam opertaions of array, but different implementation
+		get length
+		
+		traverse
+		find
+
+		dynamic operations : changes the infrastructure of the data structure (length and structure of it)
+					increasing length:
+						insert first
+						insert after
+						insert before
+						insert last
+					decreasing length:
+						delete first
+						delete last
+						delete after
+						delete before
