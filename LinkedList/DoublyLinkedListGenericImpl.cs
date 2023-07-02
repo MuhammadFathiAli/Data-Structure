@@ -11,10 +11,19 @@ namespace testConsole
     {
         public DoublyLinkedListNode<T> head { get; private set; }
         public DoublyLinkedListNode<T> tail { get; private set; }
+        public int Length { get; private set; }
 
         public DoublyLinkedListIterator<T> begin()
         {
             return new DoublyLinkedListIterator<T>(head);
+        }
+        private void IncreaseLength()
+        {
+            Length++;
+        }
+        private void DecreaseLength()
+        {
+            Length--;
         }
         public void PrintList()
         {
@@ -22,6 +31,7 @@ namespace testConsole
             {
                 Console.Write($"{itr.current().data} => ");
             }
+            Console.Write($"Length : {Length}");
             Console.WriteLine("\n");
         }
         public DoublyLinkedListNode<T> FindNode(T _data)
@@ -49,6 +59,7 @@ namespace testConsole
                 newNode.back = tail;
                 tail = newNode;
             }
+            IncreaseLength();
         }
         public void InsertAfter(DoublyLinkedListNode<T> node, T _data)
         {
@@ -65,6 +76,7 @@ namespace testConsole
             {
                 newNode.next.back = newNode;
             }
+            IncreaseLength();
         }
         public void InsertAfter(T _existingData, T _newdata)
         {
@@ -82,6 +94,7 @@ namespace testConsole
             {
                 newNode.next.back = newNode;
             }
+            IncreaseLength();
         }
         public void InsertBefore(DoublyLinkedListNode<T> _node, T _data)
         {
@@ -98,6 +111,7 @@ namespace testConsole
                 newNode.back = _node.back;
             }
             _node.back = newNode;
+            IncreaseLength();
         }
         public void InsertBefore(T _existingData, T _data)
         {
@@ -116,6 +130,7 @@ namespace testConsole
 
             }
             node.back = newNode;
+            IncreaseLength();
         }
 
         public void deleteNode(DoublyLinkedListNode<T> node)
@@ -144,7 +159,10 @@ namespace testConsole
                     node.next.back = node.back;
                 }
             }
+            DecreaseLength();
         }
+
+
         public void deleteNode(T _existingData)
         {
             DoublyLinkedListNode<T> node = FindNode(_existingData);
@@ -172,6 +190,7 @@ namespace testConsole
                     node.next.back = node.back;
                 }
             }
+            DecreaseLength();
         }
     }
     public class DoublyLinkedListNode<T> where T : struct
