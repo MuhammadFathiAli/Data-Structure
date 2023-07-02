@@ -11,6 +11,8 @@ namespace testConsole
     {
         public DoublyLinkedListNode head { get; private set; }
         public DoublyLinkedListNode tail { get; private set; }
+        public int Length { get; private set; }
+
 
         public DoublyLinkedListIterator begin()
         {
@@ -22,7 +24,16 @@ namespace testConsole
             {
                 Console.Write($"{itr.current().data} => ");
             }
+            Console.Write($"Length : {Length}");
             Console.WriteLine("\n");
+        }
+        private void IncreaseLength()
+        {
+            Length++;
+        }
+        private void DecreaseLength()
+        {
+            Length--;
         }
         public DoublyLinkedListNode FindNode(int _data)
         {
@@ -49,6 +60,7 @@ namespace testConsole
                 newNode.back = tail;
                 tail = newNode;
             }
+            IncreaseLength();
         }
         public void InsertAfter(DoublyLinkedListNode node, int _data)
         {
@@ -65,6 +77,7 @@ namespace testConsole
             {
                 newNode.next.back = newNode;
             }
+            IncreaseLength();
         }
         public void InsertAfter(int _existingData, int _newdata)
         {
@@ -82,6 +95,7 @@ namespace testConsole
             {
                 newNode.next.back = newNode;
             }
+            IncreaseLength();
         }
         public void InsertBefore(DoublyLinkedListNode _node, int _data)
         {
@@ -98,6 +112,7 @@ namespace testConsole
                 newNode.back = _node.back;
             }
             _node.back = newNode;
+            IncreaseLength();
         }
         public void InsertBefore(int _existingData, int _data)
         {
@@ -116,6 +131,7 @@ namespace testConsole
 
             }
             node.back = newNode;
+            IncreaseLength();
         }
 
         public void deleteNode(DoublyLinkedListNode node)
@@ -144,6 +160,7 @@ namespace testConsole
                     node.next.back = node.back;
                 }
             }
+            DecreaseLength();
         }
         public void deleteNode(int _existingData)
         {
@@ -172,6 +189,7 @@ namespace testConsole
                     node.next.back = node.back;
                 }
             }
+            DecreaseLength();
         }
     }
     public class DoublyLinkedListNode
