@@ -10,10 +10,20 @@ namespace testConsole
     {
         public LinkedListNode<T> head { get; private set; }
         public LinkedListNode<T> tail { get; private set; }
+        public int Length { get; private set; }
+
 
         public LinkedListIterator<T> begin()
         {
             return new LinkedListIterator<T>(head);
+        }
+        private void IncreaseLength()
+        {
+            Length++;
+        }
+        private void DecreaseLength()
+        {
+            Length--;
         }
         public void PrintList()
         {
@@ -21,6 +31,7 @@ namespace testConsole
             {
                 Console.Write($"{itr.current().data} => ");
             }
+            Console.Write($"Length : {Length}");
             Console.WriteLine("\n");
         }
         public LinkedListNode<T> FindNode(T _data)
@@ -70,6 +81,7 @@ namespace testConsole
                 tail.next = newNode;
                 tail = newNode;
             }
+            IncreaseLength();
         }
         public void InsertAfter(LinkedListNode<T> node, T _data)
         {
@@ -81,6 +93,7 @@ namespace testConsole
             {
                 tail = newNode;
             }
+            IncreaseLength();
         }
         public void InsertAfter(T _existingData, T _newdata)
         {
@@ -93,6 +106,7 @@ namespace testConsole
             {
                 tail = newNode;
             }
+            IncreaseLength();
         }
         public void InsertBefore(LinkedListNode<T> _node, T _data)
         {
@@ -108,6 +122,7 @@ namespace testConsole
             {
                 parentNode.next = newNode;
             }
+            IncreaseLength();
         }
         public void InsertBefore(T _existingData, T _data)
         {
@@ -124,6 +139,7 @@ namespace testConsole
             {
                 parentNode.next = newNode;
             }
+            IncreaseLength();
         }
 
         public void deleteNode(LinkedListNode<T> node)
@@ -151,6 +167,7 @@ namespace testConsole
                     parentNode.next = node.next;
                 }
             }
+            DecreaseLength();
         }
         public void deleteNode(T _existingData)
         {
@@ -178,6 +195,7 @@ namespace testConsole
                     parentNode.next = node.next;
                 }
             }
+            DecreaseLength();
         }
     }
     public class LinkedListNode<T> where T : struct
