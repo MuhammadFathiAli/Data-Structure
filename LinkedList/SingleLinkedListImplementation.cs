@@ -12,18 +12,9 @@ namespace testConsole
         public LinkedListNode tail { get; private set; }
         public int Length { get; private set; }
 
-
         public LinkedListIterator begin()
         {
             return new LinkedListIterator(head);
-        }
-        private void IncreaseLength()
-        {
-            Length++;
-        }
-        private void DecreaseLength()
-        {
-            Length--;
         }
         public void PrintList()
         {
@@ -141,7 +132,6 @@ namespace testConsole
             }
             IncreaseLength();
         }
-
         public void deleteNode(LinkedListNode node)
         {
             if (node == null) return;
@@ -196,6 +186,24 @@ namespace testConsole
                 }
             }
             DecreaseLength();
+        }
+        public LinkedList CopyList()
+        {
+            LinkedList newList = new LinkedList();
+            if (this.Length <= 0) return newList;
+            for (LinkedListIterator itr = new LinkedListIterator(head); itr.current() != null; itr.next())
+            {
+                newList.InsertLast(itr.data());
+            }
+            return newList;
+        }
+        private void IncreaseLength()
+        {
+            Length++;
+        }
+        private void DecreaseLength()
+        {
+            Length--;
         }
     }
     public class LinkedListNode

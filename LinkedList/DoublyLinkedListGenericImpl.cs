@@ -17,14 +17,6 @@ namespace testConsole
         {
             return new DoublyLinkedListIterator<T>(head);
         }
-        private void IncreaseLength()
-        {
-            Length++;
-        }
-        private void DecreaseLength()
-        {
-            Length--;
-        }
         public void PrintList()
         {
             for (DoublyLinkedListIterator<T> itr = begin(); itr.current() != null; itr.next())
@@ -132,7 +124,6 @@ namespace testConsole
             node.back = newNode;
             IncreaseLength();
         }
-
         public void deleteNode(DoublyLinkedListNode<T> node)
         {
             if (node == null) return;
@@ -161,8 +152,6 @@ namespace testConsole
             }
             DecreaseLength();
         }
-
-
         public void deleteNode(T _existingData)
         {
             DoublyLinkedListNode<T> node = FindNode(_existingData);
@@ -191,6 +180,24 @@ namespace testConsole
                 }
             }
             DecreaseLength();
+        }
+        public DoublyLinkedList<T> CopyList()
+        {
+            DoublyLinkedList<T> newList = new DoublyLinkedList<T>();
+            if (this.Length <= 0) return newList;
+            for (DoublyLinkedListIterator<T> itr = new DoublyLinkedListIterator<T>(head); itr.current() != null; itr.next())
+            {
+                newList.InsertLast(itr.data());
+            }
+            return newList;
+        }
+        private void IncreaseLength()
+        {
+            Length++;
+        }
+        private void DecreaseLength()
+        {
+            Length--;
         }
     }
     public class DoublyLinkedListNode<T> where T : struct
@@ -236,4 +243,3 @@ namespace testConsole
         }
     }
 }
-

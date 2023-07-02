@@ -13,7 +13,6 @@ namespace testConsole
         public DoublyLinkedListNode tail { get; private set; }
         public int Length { get; private set; }
 
-
         public DoublyLinkedListIterator begin()
         {
             return new DoublyLinkedListIterator(head);
@@ -26,14 +25,6 @@ namespace testConsole
             }
             Console.Write($"Length : {Length}");
             Console.WriteLine("\n");
-        }
-        private void IncreaseLength()
-        {
-            Length++;
-        }
-        private void DecreaseLength()
-        {
-            Length--;
         }
         public DoublyLinkedListNode FindNode(int _data)
         {
@@ -133,7 +124,6 @@ namespace testConsole
             node.back = newNode;
             IncreaseLength();
         }
-
         public void deleteNode(DoublyLinkedListNode node)
         {
             if (node == null) return;
@@ -190,6 +180,24 @@ namespace testConsole
                 }
             }
             DecreaseLength();
+        }
+        public DoublyLinkedList CopyList()
+        {
+            DoublyLinkedList newList = new DoublyLinkedList();
+            if (this.Length <= 0) return newList;
+            for (DoublyLinkedListIterator itr = new DoublyLinkedListIterator(head); itr.current() != null; itr.next())
+            {
+                newList.InsertLast(itr.data());
+            }
+            return newList;
+        }
+        private void IncreaseLength()
+        {
+            Length++;
+        }
+        private void DecreaseLength()
+        {
+            Length--;
         }
     }
     public class DoublyLinkedListNode

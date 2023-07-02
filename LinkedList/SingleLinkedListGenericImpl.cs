@@ -12,19 +12,6 @@ namespace testConsole
         public LinkedListNode<T> tail { get; private set; }
         public int Length { get; private set; }
 
-
-        public LinkedListIterator<T> begin()
-        {
-            return new LinkedListIterator<T>(head);
-        }
-        private void IncreaseLength()
-        {
-            Length++;
-        }
-        private void DecreaseLength()
-        {
-            Length--;
-        }
         public void PrintList()
         {
             for (LinkedListIterator<T> itr = begin(); itr.current() != null; itr.next())
@@ -33,6 +20,10 @@ namespace testConsole
             }
             Console.Write($"Length : {Length}");
             Console.WriteLine("\n");
+        }
+        public LinkedListIterator<T> begin()
+        {
+            return new LinkedListIterator<T>(head);
         }
         public LinkedListNode<T> FindNode(T _data)
         {
@@ -141,7 +132,6 @@ namespace testConsole
             }
             IncreaseLength();
         }
-
         public void deleteNode(LinkedListNode<T> node)
         {
             if (node == null) return;
@@ -196,6 +186,25 @@ namespace testConsole
                 }
             }
             DecreaseLength();
+        }
+        public LinkedList CopyList()
+        {
+            LinkedList newList = new LinkedList();
+            if (this.Length <= 0) return newList;
+            for (LinkedListIterator itr = new LinkedListIterator(head); itr.current() != null; itr.next())
+            {
+                newList.InsertLast(itr.data());
+            }
+            return newList;
+        }
+
+        private void IncreaseLength()
+        {
+            Length++;
+        }
+        private void DecreaseLength()
+        {
+            Length--;
         }
     }
     public class LinkedListNode<T> where T : struct
