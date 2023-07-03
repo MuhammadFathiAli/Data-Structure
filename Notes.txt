@@ -179,3 +179,15 @@
 		* Peek
 		* size
 		* isEmpty
+ *********************************************************************************
+ 6 - Queue
+	- Queue is first in first out 
+	- to enqueue and dequeue only 
+	- infrastructure 
+		Array or LinkedList 
+	- Operations 
+		enqueue
+		dequeue
+		peek
+		size
+		is empty
