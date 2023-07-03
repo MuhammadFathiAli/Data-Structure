@@ -191,3 +191,25 @@
 		peek
 		size
 		is empty
+ *********************************************************************************
+ 7 - Key Value Pair && Dictionary 
+	-  key value pair is a concept that can be a comonent of other data structures 
+	- key and value pair is a unique pair 
+	- key is unique and value belongs to one key
+	- no more than key has the same value
+	- class of key value pair , key is private set and get only, u may make the value the same
+		and u may make it changable
+	- Dictionary is a list of key value pairs + some restrictions 
+		all keys are same type and all values are same types.
+	- dictionary is open only from key side 
+		u can directly access all keys, but u can't directly access values 
+		u access values through keys.
+	- no keys order restrictions by nature 
+	- Dictionary Infrastructure: 
+		Array or others (linkedList-tree)
+	- Dictionary Operations:
+		set
+		get
+		remove
+		resize
+		size
