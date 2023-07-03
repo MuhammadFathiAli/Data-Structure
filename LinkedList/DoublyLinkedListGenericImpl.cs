@@ -45,6 +45,28 @@ namespace testConsole
             }
             return null;
         }
+        public void InsertFirst(T _data)
+        {
+            if (!CanInsert(_data)) return;
+            DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(_data);
+            if (head == null)
+            {
+                head = newNode;
+                tail = newNode;
+            }
+            else
+            {
+                newNode.next = head;
+                head = newNode;
+            }
+            IncreaseLength();
+        }
+        public void DeleteHead()
+        {
+            if (head == null) return;
+            head = head.next;
+            DecreaseLength();
+        }
         public void InsertLast(T _data)
         {
             if (!CanInsert(_data)) return;

@@ -159,3 +159,23 @@
 						delete last
 						delete after
 						delete before
+ *********************************************************************************
+5- Stack 
+	- Stack is a first in last out 
+	- can put data in one direction and read only top data 
+	- there's a classiication of data structures : physical and logical data structures 
+		 physical : Array and LinkedList
+		 logical : rest of DataStructure
+		 classification is done according to the infrastructure of the data structure
+		 Array => consecutive memory store 
+		 LinkedList => independent and non consecutive memory stores 
+		 and these 2 modes are using the memory as it is
+		 rest of data structures' infrastructure are composed of another data structures\
+	- infrastructure : 
+		- Array or linkedList
+	- Operations :
+		* Push
+		* Pop
+		* Peek
+		* size
+		* isEmpty

@@ -79,6 +79,28 @@ namespace testConsole
             }
             return null;
         }
+        public void InsertFirst(int _data)
+        {
+            if (!CanInsert(_data)) return;
+            LinkedListNode newNode = new LinkedListNode(_data);
+            if (head == null)
+            {
+                head = newNode;
+                tail = newNode;
+            }
+            else
+            {
+                newNode.next = head;
+                head = newNode;
+            }
+            IncreaseLength();
+        }
+        public void DeleteHead()
+        {
+            if (head == null) return;
+            head = head.next;
+            DecreaseLength();
+        }
         public void InsertLast(int _data)
         {
             if (!CanInsert(_data)) return;

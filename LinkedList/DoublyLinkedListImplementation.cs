@@ -117,6 +117,28 @@ namespace testConsole
             _node.back = newNode;
             IncreaseLength();
         }
+        public void InsertFirst(int _data)
+        {
+            if (!CanInsert(_data)) return;
+            DoublyLinkedListNode newNode = new DoublyLinkedListNode(_data);
+            if (head == null)
+            {
+                head = newNode;
+                tail = newNode;
+            }
+            else
+            {
+                newNode.next = head;
+                head = newNode;
+            }
+            IncreaseLength();
+        }
+        public void DeleteHead()
+        {
+            if (head == null) return;
+            head = head.next;
+            DecreaseLength();
+        }
         public void InsertBefore(int _existingData, int _data)
         {
             if (!CanInsert(_data)) return;
