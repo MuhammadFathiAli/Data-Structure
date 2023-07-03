@@ -237,3 +237,61 @@
 		domain name servers (DNSSEC)
 		file fingerprints 
 		......and more
+ 
+ ****HashTables****
+	- is a collection of key-value pairs (dictionary) with a twist.
+	- the twist is :	
+		in previous simple implemented dictionary i was looping for the keys when searching O(N)
+		sweet spot is the searching for a key will be O(1)
+		when inserting:
+			in simple dictionary i was just inserting in the empty room
+			in hashtable i am inserting in the right place according to hash value
+			knowing the key => i can know the right place to insert and knowing the place from where i can retrieve
+			first way is  hash = key % array.Length (high collision probability)
+			second way is hash = (FNV-1a(key)) % array.Length 
+
+	- #### 
+		HashTable Core Operations : what makes a hashtabe a hashtable
+		convert the key to array index 
+		using % will make a collision, FNV-1a lowered its probability, but it will still happen, and it is like a protective way 
+		collioson handling
+		#####################        ######################
+		##                 ##        ##                  ##
+		## Converting Key  ##        ##     Collision    ##
+		##  to array Index ##        ##      Handling    ## 
+		##				   ##        ##                  ##
+		#####################        ######################
+		this is the Twist that hashtable does over  Dictionary 
+
+	## Collision Hanldeing 
+		if after hahsing the keys and found out that there are 2 kyes or more has the same hash value 
+		in case of 2 
+		there will be one empty index 
+		there are 2 options to deal with this situation 
+		1- Closed hashing (open addressing) => set this key in the empty index, but the index will
+			not be a representation of the key hash.
+			open addressing => open for any index in the hash table
+			closed hashing => closed, don't leave the current hash table (don't use any different data structure)
+			3 methods can implement this way (linear probing- quadratic probing - double hashing)
+				linear probing 
+					loop i = 1 to n-1 (n is the array length)
+						new hash = (hash + i) % n
+				quadratic probing (less steps than linear) 
+					loop i = 1 to n-1 (n is the array length)
+						new hash = (hash + i^2) % n
+				double hashing 
+					loop i = 1 to n-1 (n is the array length)
+						new hash = (hash + hash2) % n
+						hash2 = (hash +i) % n
+		2- Open Hashing(Closed Addressing) 
+			keep the relation between the hash value and the index
+			the index will remain representable of the key hash value 
+			but index (the value opposite to the key hash) will contain all the values opposite of the key 
+			closed addressing => closed, don't change the index
+			open hashing => open for use any other data structure in conjuction with the current hash table 
+			there is one method implementing this way 
+			Separate chaining 
+				the value to the key will be a linkedList containing all mapped values.
+
+ *********************************************************************************
+ 
