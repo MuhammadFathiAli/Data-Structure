@@ -293,5 +293,13 @@
 			Separate chaining 
 				the value to the key will be a linkedList containing all mapped values.
 
+	- Hash Table Implementation 
+		- Infrastrure is Array (converting the hash value to array index)
+		- operations :
+			set 
+			get 
+			remove
+			resize
+			size 
  *********************************************************************************
  
