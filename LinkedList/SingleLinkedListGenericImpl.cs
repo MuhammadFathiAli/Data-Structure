@@ -11,7 +11,15 @@ namespace testConsole
         public LinkedListNode<T> head { get; private set; }
         public LinkedListNode<T> tail { get; private set; }
         public int Length { get; private set; }
+        public bool isUnique { get; private set; }
 
+        public LinkedList()
+        {
+        }
+        public LinkedList(bool _isUnique)
+        {
+            isUnique = _isUnique;
+        }
         public void PrintList()
         {
             for (LinkedListIterator<T> itr = begin(); itr.current() != null; itr.next())
@@ -61,6 +69,7 @@ namespace testConsole
         }
         public void InsertLast(T _data)
         {
+            if (!CanInsert(_data)) return;
             LinkedListNode<T> newNode = new LinkedListNode<T>(_data);
             if (head == null)
             {
@@ -76,6 +85,7 @@ namespace testConsole
         }
         public void InsertAfter(LinkedListNode<T> node, T _data)
         {
+            if (!CanInsert(_data)) return;
             if (node == null) return;
             LinkedListNode<T> newNode = new LinkedListNode<T>(_data);
             newNode.next = node.next;
@@ -88,6 +98,7 @@ namespace testConsole
         }
         public void InsertAfter(T _existingData, T _newdata)
         {
+            if (!CanInsert(_newdata)) return;
             LinkedListNode<T> node = FindNode(_existingData);
             if (node == null) return;
             LinkedListNode<T> newNode = new LinkedListNode<T>(_newdata);
@@ -101,6 +112,7 @@ namespace testConsole
         }
         public void InsertBefore(LinkedListNode<T> _node, T _data)
         {
+            if (!CanInsert(_data)) return;
             LinkedListNode<T> newNode = new LinkedListNode<T>(_data);
             LinkedListNode<T> parentNode = FindParentNode(_node);
 
@@ -117,6 +129,7 @@ namespace testConsole
         }
         public void InsertBefore(T _existingData, T _data)
         {
+            if (!CanInsert(_data)) return;
             LinkedListNode<T> newNode = new LinkedListNode<T>(_data);
             LinkedListNode<T> node = FindNode(_existingData);
             LinkedListNode<T> parentNode = FindParentNode(_existingData);
@@ -187,17 +200,33 @@ namespace testConsole
             }
             DecreaseLength();
         }
-        public LinkedList CopyList()
+        public LinkedList<T> CopyList()
         {
-            LinkedList newList = new LinkedList();
+            LinkedList<T> newList = new LinkedList<T>();
             if (this.Length <= 0) return newList;
-            for (LinkedListIterator itr = new LinkedListIterator(head); itr.current() != null; itr.next())
+            for (LinkedListIterator<T> itr = begin(); itr.current() != null; itr.next())
             {
                 newList.InsertLast(itr.data());
             }
             return newList;
         }
 
+        public bool IsExist(T _data)
+        {
+            if (FindNode(_data) == null)
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool CanInsert(T _data)
+        {
+            if (isUnique && IsExist(_data))
+            {
+                return false;
+            }
+            return true;
+        }
         private void IncreaseLength()
         {
             Length++;

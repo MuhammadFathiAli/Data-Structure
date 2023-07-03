@@ -10,8 +10,28 @@ namespace testConsole
     {
         public LinkedListNode head { get; private set; }
         public LinkedListNode tail { get; private set; }
-        public int Length { get; private set; }
+        public int length { get; private set; }
+        public bool isUnique { get; private set; }
 
+        public LinkedList()
+        {
+        }
+        public LinkedList(bool _isUnique)
+        {
+            isUnique = _isUnique;
+        }
+
+
+        public LinkedList CopyList()
+        {
+            LinkedList newList = new LinkedList();
+            if (this.length <= 0) return newList;
+            for (LinkedListIterator itr = new LinkedListIterator(head); itr.current() != null; itr.next())
+            {
+                newList.InsertLast(itr.data());
+            }
+            return newList;
+        }
         public LinkedListIterator begin()
         {
             return new LinkedListIterator(head);
@@ -22,7 +42,7 @@ namespace testConsole
             {
                 Console.Write($"{itr.current().data} => ");
             }
-            Console.Write($"Length : {Length}");
+            Console.Write($"Length : {length}");
             Console.WriteLine("\n");
         }
         public LinkedListNode FindNode(int _data)
@@ -61,6 +81,7 @@ namespace testConsole
         }
         public void InsertLast(int _data)
         {
+            if (!CanInsert(_data)) return;
             LinkedListNode newNode = new LinkedListNode(_data);
             if (head == null)
             {
@@ -76,6 +97,7 @@ namespace testConsole
         }
         public void InsertAfter(LinkedListNode node, int _data)
         {
+            if (!CanInsert(_data)) return;
             if (node == null) return;
             LinkedListNode newNode = new LinkedListNode(_data);
             newNode.next = node.next;
@@ -88,6 +110,7 @@ namespace testConsole
         }
         public void InsertAfter(int _existingData, int _newdata)
         {
+            if (!CanInsert(_newdata)) return;
             LinkedListNode node = FindNode(_existingData);
             if (node == null) return;
             LinkedListNode newNode = new LinkedListNode(_newdata);
@@ -101,6 +124,7 @@ namespace testConsole
         }
         public void InsertBefore(LinkedListNode _node, int _data)
         {
+            if (!CanInsert(_data)) return;
             LinkedListNode newNode = new LinkedListNode(_data);
             LinkedListNode parentNode = FindParentNode(_node);
 
@@ -117,6 +141,7 @@ namespace testConsole
         }
         public void InsertBefore(int _existingData, int _data)
         {
+            if (!CanInsert(_data)) return;
             LinkedListNode newNode = new LinkedListNode(_data);
             LinkedListNode node = FindNode(_existingData);
             LinkedListNode parentNode = FindParentNode(_existingData);
@@ -187,25 +212,32 @@ namespace testConsole
             }
             DecreaseLength();
         }
-        public LinkedList CopyList()
+        public bool IsExist(int _data)
         {
-            LinkedList newList = new LinkedList();
-            if (this.Length <= 0) return newList;
-            for (LinkedListIterator itr = new LinkedListIterator(head); itr.current() != null; itr.next())
+            if (FindNode(_data) == null)
             {
-                newList.InsertLast(itr.data());
+                return false;
             }
-            return newList;
+            return true;
+        }
+        public bool CanInsert(int _data)
+        {
+            if (isUnique && IsExist(_data))
+            {
+                return false;
+            }
+            return true;
         }
         private void IncreaseLength()
         {
-            Length++;
+            length++;
         }
         private void DecreaseLength()
         {
-            Length--;
+            length--;
         }
     }
+
     public class LinkedListNode
     {
         public int data;

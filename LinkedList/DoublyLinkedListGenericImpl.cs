@@ -12,7 +12,15 @@ namespace testConsole
         public DoublyLinkedListNode<T> head { get; private set; }
         public DoublyLinkedListNode<T> tail { get; private set; }
         public int Length { get; private set; }
+        public bool isUnique { get; private set; }
 
+        public DoublyLinkedList()
+        {
+        }
+        public DoublyLinkedList(bool _isUnique)
+        {
+            isUnique = _isUnique;
+        }
         public DoublyLinkedListIterator<T> begin()
         {
             return new DoublyLinkedListIterator<T>(head);
@@ -39,6 +47,7 @@ namespace testConsole
         }
         public void InsertLast(T _data)
         {
+            if (!CanInsert(_data)) return;
             DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(_data);
             if (head == null)
             {
@@ -55,6 +64,7 @@ namespace testConsole
         }
         public void InsertAfter(DoublyLinkedListNode<T> node, T _data)
         {
+            if (!CanInsert(_data)) return;
             if (node == null) return;
             DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(_data);
             newNode.next = node.next;
@@ -72,6 +82,7 @@ namespace testConsole
         }
         public void InsertAfter(T _existingData, T _newdata)
         {
+            if (!CanInsert(_newdata)) return;
             DoublyLinkedListNode<T> node = FindNode(_existingData);
             if (node == null) return;
             DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(_newdata);
@@ -90,6 +101,7 @@ namespace testConsole
         }
         public void InsertBefore(DoublyLinkedListNode<T> _node, T _data)
         {
+            if (!CanInsert(_data)) return;
             DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(_data);
 
             newNode.next = _node;
@@ -107,6 +119,7 @@ namespace testConsole
         }
         public void InsertBefore(T _existingData, T _data)
         {
+            if (!CanInsert(_data)) return;
             DoublyLinkedListNode<T> newNode = new DoublyLinkedListNode<T>(_data);
             DoublyLinkedListNode<T> node = FindNode(_existingData);
 
@@ -190,6 +203,22 @@ namespace testConsole
                 newList.InsertLast(itr.data());
             }
             return newList;
+        }
+        public bool IsExist(T _data)
+        {
+            if (FindNode(_data) == null)
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool CanInsert(T _data)
+        {
+            if (isUnique && IsExist(_data))
+            {
+                return false;
+            }
+            return true;
         }
         private void IncreaseLength()
         {
