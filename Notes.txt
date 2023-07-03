@@ -213,3 +213,27 @@
 		remove
 		resize
 		size
+ *********************************************************************************
+ 8 - Hashing 
+	- transfrom data to composed representation 
+	- hashing is different than encryprion 
+		encryption is two way transformation, u can encrypt data then decrypt it
+		hashing is one way, u can only hash data, but u can't reform it to its original form 
+	- there are hashing function => it takes data and function it
+	- hash is the output value, usually it is a constant length
+	- hash function is the function that hashes the values 
+	- map is a one to one relationship
+	- hashtable is a map between real data and hash data
+	- hashing function (FNV-1a) is a 32 bit function
+		it means its ouput is 32 bit length hash value
+		Data : "This is Original Text"
+		Hash function : FNV-1a
+		hash : d60b93a5  hexa each 2 chars is 1 byte => 4 * 1 = 4 bytes = 32 bits 	
+		hash is a case sensitive value 
+	- there could be a collision
+	- hashing is used in 
+		save passwords in db
+		database indexing
+		domain name servers (DNSSEC)
+		file fingerprints 
+		......and more
