@@ -19,12 +19,14 @@ namespace testConsole
         }
         public T Pop()
         {
+            if (IsEmpty()) return null;
             T data = list.head.data;
             list.DeleteHead();
             return data;
         }
         public T Peek()
         {
+            if (IsEmpty()) return null;
             return list.head.data;
         }
         public bool IsEmpty()
