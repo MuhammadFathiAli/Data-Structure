@@ -46,9 +46,9 @@ namespace testConsole
         {
             return list[topIndex];
         }
-        public bool IsEmpty()
+        public bool HasData()
         {
-            return lastIndex <= 0;
+            return lastIndex > 0;
         }
         public int Size()
         {

@@ -27,9 +27,9 @@ namespace testConsole
         {
             return list.head.data;
         }
-        public bool IsEmpty()
+        public bool HasData()
         {
-            return list.Length <= 0;
+            return list.Length > 0;
         }
         public int Size()
         {
