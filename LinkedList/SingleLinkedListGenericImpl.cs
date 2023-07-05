@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace testConsole
 {
-    public class LinkedList<T> where T : struct
+    public class LinkedList<T>
     {
         public LinkedListNode<T> head { get; private set; }
         public LinkedListNode<T> tail { get; private set; }
@@ -258,7 +258,7 @@ namespace testConsole
             Length--;
         }
     }
-    public class LinkedListNode<T> where T : struct
+    public class LinkedListNode<T>
     {
         public T data;
         public LinkedListNode<T> next;
@@ -268,7 +268,7 @@ namespace testConsole
             next = null;
         }
     }
-    public class LinkedListIterator<T> where T : struct
+    public class LinkedListIterator<T>
     {
         LinkedListNode<T> currentNode;
         public LinkedListIterator()

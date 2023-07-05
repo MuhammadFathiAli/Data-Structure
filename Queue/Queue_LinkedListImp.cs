@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace testConsole
 {
-    public class Queue_LinkedListBased<T> where T : struct
+    public class Queue_LinkedListBased<T> 
     {
         public LinkedList<T> list { get; private set; }
         public Queue_LinkedListBased()

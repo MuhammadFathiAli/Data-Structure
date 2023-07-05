@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace testConsole
 {
-    public class HashTable<Tkey, Tvalue> where Tkey : class
+    public class HashTable<Tkey, Tvalue> 
     {
         public KeyValuePair[] entries;
         int initialSize;

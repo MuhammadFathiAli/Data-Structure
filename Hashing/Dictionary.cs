@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace testConsole
 {
-    public class Dictionary<Tkey, Tvalue> where Tkey : class
+    public class Dictionary<Tkey, Tvalue> 
     {
         KeyValuePair[] entries;
         int initialSize;

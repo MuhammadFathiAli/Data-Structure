@@ -302,4 +302,71 @@
 			resize
 			size 
  *********************************************************************************
- 
+ 9 - Trees 
+	- a conecpt that a data structure composed from it 
+	- each item of tree is a node
+	- a Node tree that has other nodes coming out from it 
+	- File System is an example of trees 
+	- Binary tree is a kind of trees, each node has 0 or 1 or 2 max nodes coming out from it
+	- node has [data-pointer to left node - pointer to right node - pointer to parent node]
+	- root node is the first node, u have to know it all the time 
+	- connector between node(pointer) called edge 
+	- bottom level of nodes (node that no nodes come out of it) called leaf.
+	- tree has levels 0 basd 
+	- any group of nodes in the tree called sub-tree.
+	- height of the tree = number of levels of a tree.
+	- depth of the node = level of the node
+	-level 0 ,level 1, level 2, level 3 Tree
+	- tree height = 4 
+	- depth of node 5 in the level two = 2
+	- Tree :
+		- Infrastructure:
+			just like the LinkedList infrastructure 
+			independent Non-consecutive memory stores.
+			may be same as array according to some refereneces but the more logical is it is more likely LinkedList.
+		- Operations:
+			inser
+			find
+			remove
+			traversal
+			height = number of levels
+
+		- Traversal operations:
+			not just looping, but there are some Techniques to do the traversal.
+			1- Breadth First Traversal == Breadth first search in graph 
+				use queue datastructure in the binary tree.
+				Steps
+					* add root node in a queue
+					* while queue has data:
+						- currentNode = queue.Dequeue
+						- print data of the currentNode
+						- if currentNode has left node then enqueue it
+						- if currentNode has right node then enqueue it
+		u'll get ur self in a loop that reads all binary tree data 
+		of each level starting from 0 to height-1
+		and in each level starting from left nodes and going to the right direction.
+
+		- breadth first (means considering level), always use queue
+		this is what gonna help u maintaing the level.
+		
+		- Breadth first Insertion (Level based insertion)
+		- same logic of traversal => search for the first null node (level lower to highrt then left to right) to insert ur data in it
+			- the node u iterate on and is not null, put it on the queue, to keep the sequenece of the breadth first.
+			inputs : newNode 
+			- if root is null
+				root = newNode
+				return
+			- add root to a queue
+			- while queue has a data 
+				* currentNode = queue.Dequeue
+				* if CurerentNode.left is null 
+					- currentNode.left = newNode
+						break
+				* else 
+					enqueue currentNode.left
+				* if CurerentNode.right is null 
+					- currentNode.right = newNode
+						break
+				* else 
+					enqueu currentNode.right
+		

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace testConsole
 {
 
-    public class DoublyLinkedList<T> where T : struct
+    public class DoublyLinkedList<T>
     {
         public DoublyLinkedListNode<T> head { get; private set; }
         public DoublyLinkedListNode<T> tail { get; private set; }
@@ -251,7 +251,7 @@ namespace testConsole
             Length--;
         }
     }
-    public class DoublyLinkedListNode<T> where T : struct
+    public class DoublyLinkedListNode<T>
     {
         public T data;
         public DoublyLinkedListNode<T> next;
@@ -263,7 +263,7 @@ namespace testConsole
             back = null;
         }
     }
-    public class DoublyLinkedListIterator<T> where T : struct
+    public class DoublyLinkedListIterator<T> 
     {
         DoublyLinkedListNode<T> currentNode;
         public DoublyLinkedListIterator()
