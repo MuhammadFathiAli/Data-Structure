@@ -369,4 +369,35 @@
 						break
 				* else 
 					enqueu currentNode.right
-		
+		- Get Height (recursion)
+		- PreOrder Traversal (Depth First traversal)
+			get in depth first  (recursive)
+			node=> left=> right
+		- InOrder Traversal (Depth First traversal)
+			get in depth first  (recursive)
+			check left => print the node value => check right
+			left => node => right
+		- PostOrder Traversal (Depth First traversal)
+			get in depth first  (recursive)
+			check left => check right => print the node value 
+			left => right => node
+
+								A
+					B						C
+			   D		E		     F	 	    	G
+												H		I		
+
+	Traverlsal Breadth First = A => B => c => D => E => F => G => H => I
+	Pre Order Depth first    = A => B => D => E => C => F => G => H => I
+	In Order Depth first     = D => B => E => A => F => C => H => G => I
+	Post Order Depth First   = D => E => B => F => H => I => G => C => A
+
+	- Find(data) => use any traversal method
+	-Delete(data) => 
+		Concept : replace the node with the last node in the tree (the bottom-most and right-most) node of the tree
+		- find the parent, left and right of the deired to delete node
+		- find the last node
+		- make last node point to node childs
+		- make node parent point to the last node
+		- clear the pointer of the last node in its parent
+		- make node = null

@@ -43,6 +43,63 @@ namespace testConsole
                 }
             }
         }
+        public int GetHeight()
+        {
+            return CalculateHeight(Root);
+        }
+        public void PreOrder()
+        {
+            InternalPreOrder(Root);
+            Console.WriteLine();
+        }
+        public void InOrder()
+        {
+            InternalInOrder(Root);
+            Console.WriteLine();
+        }
+        public void PostOrder()
+        {
+            InternalPostOrder(Root);
+            Console.WriteLine();
+        }
+
+        private int CalculateHeight(TreeNode node)
+        {
+            if (node == null)
+                return 0;
+            return 1 + Math.Max(CalculateHeight(node.Left), CalculateHeight(node.Right));
+        }
+        private void InternalPreOrder(TreeNode node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            Console.Write($"{node.Data} => ");
+            InternalPreOrder(node.Left);
+            InternalPreOrder(node.Right);
+        }
+        private void InternalInOrder(TreeNode node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            InternalInOrder(node.Left);
+            Console.Write($"{node.Data} => ");
+            InternalInOrder(node.Right);
+        }
+        private void InternalPostOrder(TreeNode node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            InternalPostOrder(node.Left);
+            InternalPostOrder(node.Right);
+            Console.Write($"{node.Data} => ");
+        }
+
 
         class TreeNode
         {
