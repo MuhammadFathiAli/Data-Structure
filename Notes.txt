@@ -401,3 +401,36 @@
 		- make node parent point to the last node
 		- clear the pointer of the last node in its parent
 		- make node = null
+
+ *********************************************************************************
+ 10 - Binary Search tree 
+	the most used tree, binary search tree is a binary tree that has a one charachtersitc:
+		leftNode.Data < Parentnode.Data < rightNode.Data
+		why : faster search 
+		levels number <= items number 
+		optimum levels number (log(N)) => (balanced binary search tree)
+	* Duplication Handling 
+		we have three methods to choose from 
+		- Don't allow duplication
+		- allow duplication, preferable (repeated item placed in a constant direction always right the original node or always left)
+		- allow duplication, add property in the TreeNode class Called (Counter)
+			and counter = 1 in the CTOR, and counter++; at duplication
+		- dealing with tree is (iterative loops or recursion) do whatever suitable of both
+		- Insert(data)  O(log n) optimum case (balanced)
+			- if root is null
+				* node = newNode(data)
+				- return
+			- CurrentNode = root;
+			- while (currentNode is not null)
+				if data < currentNode.data
+					if currentNode.left is null
+						currentNode.left = newNode(data)
+						break;
+					else 
+						currentNode = currentNode.left
+				else 
+					if currentNode.right is null
+						currentNode.right = newNode(data)
+						break;
+					else 
+						currentNode = currentNode.right
