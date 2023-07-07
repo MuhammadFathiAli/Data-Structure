@@ -397,7 +397,7 @@
 		Concept : replace the node with the last node in the tree (the bottom-most and right-most) node of the tree
 		- find the parent, left and right of the deired to delete node
 		- find the last node
-		- make last node point to node childs
+		 - make last node point to node childs
 		- make node parent point to the last node
 		- clear the pointer of the last node in its parent
 		- make node = null

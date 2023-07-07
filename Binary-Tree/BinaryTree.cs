@@ -9,7 +9,6 @@ namespace testConsole
     public class BinaryTree<Tdata>
     {
         TreeNode Root;
-
         public void Insert(Tdata _data)
         {
             TreeNode newNode = new TreeNode(_data);
@@ -62,7 +61,104 @@ namespace testConsole
             InternalPostOrder(Root);
             Console.WriteLine();
         }
+        public bool IsExist(Tdata _data)
+        {
+            if (Find(Root, _data) != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public Tdata GetLastItem()
+        {
+            TreeNode node = InternalGetLastItem(Root);
+            return node.Data;
+        }
+        public void Delete(Tdata _data)
+        {
+            InternalDelete(_data);
+        }
+        public Tdata GetParent(Tdata _data)
+        {
+            if (InternalGetParentNode(Root, _data) is null)
+            {
+                return default(Tdata);
+            }
 
+            return InternalGetParentNode(Root, _data).Data;
+        }
+        private void InternalDelete(Tdata _data)
+        {
+            TreeNode node = Find(Root, _data);
+            TreeNode lastNode = InternalGetLastItem(Root);
+            TreeNode parentNode = InternalGetParentNode(Root, _data);
+            TreeNode parentLastNode = InternalGetParentNode(Root, lastNode.Data);
+            if (node != null && lastNode != null)
+                ReplaceNodes(node, lastNode, parentNode, parentLastNode);
+        }
+
+        private void ReplaceNodes(TreeNode node, TreeNode lastNode, TreeNode parentNode, TreeNode parentLastNode)
+        {
+            lastNode.Right = node.Right;
+            lastNode.Left = node.Left;
+            if (parentNode == null)
+            {
+                Root = lastNode;
+            }
+            else if (parentNode.Left.Data.Equals(node.Data))
+            {
+                parentNode.Left = lastNode;
+            }
+            else if (parentNode.Right.Data.Equals(node.Data))
+            {
+                parentNode.Right = lastNode;
+            }
+            if (parentLastNode.Left.Data.Equals(lastNode.Data))
+            {
+                parentLastNode.Left = null;
+            }
+            else if (parentLastNode.Right.Data.Equals(lastNode.Data))
+            {
+                parentLastNode.Right = null;
+            }
+            node = null;
+        }
+        private TreeNode InternalGetParentNode(TreeNode startingNode, Tdata _data)
+        {
+            if (startingNode == null)
+            {
+                return null;
+            }
+            if ((startingNode?.Left == null && startingNode.Right == null) || Root.Data.Equals(_data))
+            {
+                return null;
+            }
+            if ((startingNode.Left?.Data.Equals(_data) ?? false) || (startingNode.Right?.Data.Equals(_data) ?? false))
+            {
+                return startingNode;
+            }
+            return InternalGetParentNode(startingNode.Left, _data) ?? InternalGetParentNode(startingNode.Right, _data);
+        }
+        private TreeNode InternalGetLastItem(TreeNode node)
+        {
+            if (node.Right == null)
+            {
+                return node;
+            }
+            return InternalGetLastItem(node.Right);
+        }
+        private TreeNode Find(TreeNode node, Tdata _data)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+            if (_data.Equals(node.Data))
+            {
+                return node;
+            }
+            return Find(node.Left, _data) ?? Find(node.Right, _data);
+        }
         private int CalculateHeight(TreeNode node)
         {
             if (node == null)
@@ -99,8 +195,6 @@ namespace testConsole
             InternalPostOrder(node.Right);
             Console.Write($"{node.Data} => ");
         }
-
-
         class TreeNode
         {
             public Tdata Data { get; set; }
