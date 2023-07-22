@@ -576,3 +576,146 @@
 					newNodeRight = recursiveBalance(mide + 1, end, nodes)
 					return newNode;
 			}
+ *********************************************************************************
+
+11 -  Heap 
+	Special type of Binary tree
+		- there r 2 types of heap 
+			1- Max heap : parent is greater than its children
+				node > left , node > right 
+			2- Min heap : parent is smaller than its children
+				node < left , node < right 
+
+			Max heap => left < parent > right
+			Min heap => left > parent < right
+			BS Tree  => left < parent < right
+		
+		- Complete Binary tree
+			to step in a + 1 level, the level must be complete (each node has 2 children)
+
+
+		- Can be represented by array , as it a completebinary tree.
+											A
+							B								C
+					D				E				F				G
+				H
+				
+				A	B	C	D	E	F	G	H
+				0	1	2	3	4	5	6	7
+				- number of total nodes (No of nodes starting from root to this level) = 2 ^ (no of level)
+					at this nummber => start a new level 
+				- for each node in (i) index, we can get its:
+					Parent = array[(i - 1) / 2]
+					left   = array[(2 * i) + 1]
+					right  = array[(2 * i) + 2]
+					so, u can store the heap tree in an array and save some memory.
+					use this math represntation in read, write operations.
+
+				- Breadth First traversal (level order)
+					use the above equations 
+					Steps :	
+						- A is a root will added to [0]
+						- B is left = [2 * 0 + 1] = [1]
+						- C is right = [2 * 0 + 2 ] = [2]
+						- D is left of B, and B in [1] = [2 * 1 + 1] = [3] ...etc 
+
+		- Insert  min heap, by bercolating up - Bubbling Up  
+			Scratches 
+				[
+					- ResizeOrNot();
+					- i have an existing min heap and a node that i want to insert in the heap in the right place
+						based on its value  considering being min heap (left > parent < right)
+					- create a node with the value in the next available location (based on level order or breadth).
+					- get the parent of the new node
+					- compare the new value with the parent value
+						if value is smaller 
+							- swap parent and new node values 
+							- repeat from step 2.
+						else 
+							- exit.
+
+				]
+				SeudoCode
+				[
+					- ResizeOrNot();
+					i = size; // to maintain the data size in the array => count not capacity.
+					size++
+					array[i] = data;
+					parent_index = (i - 1) / 2;
+					while (i != 0 && array[i] < array[parent_index])
+						- temp = array[i];
+						- array[i] = array[parent_index]
+						- array[parent_index] = temp;
+						- i = parent_index;
+						- parent_index = (i - 1) / 2;
+					return;
+				]
+		- Insert  max heap 
+			Scratches 
+				[
+					- ResizeOrNot();
+					- i have an existing min heap and a node that i want to insert in the heap in the right place
+						based on its value  considering being max heap (left < parent > right)
+					- create a node with the value in the next available location (based on level order or breadth).
+					- get the parent of the new node
+					- compare the new value with the parent value
+						if value is larger 
+							- swap parent and new node values 
+							- repeat from step 2.
+						else 
+							- exit.
+
+				]
+				SeudoCode
+				[
+					- ResizeOrNot();
+					i = size; // to maintain the data size in the array => count not capacity.
+					size++
+					array[i] = data;
+					parent_index = (i - 1) / 2;
+					while (i != 0 && array[i] > array[parent_index])
+						- temp = array[i];
+						- array[i] = array[parent_index]
+						- array[parent_index] = temp;
+						- i = parent_index;
+						- parent_index = (i - 1) / 2;
+					return;
+				]
+
+		- Pop (min heap) Percolate Down
+			- u can only delete the root node.
+
+			Scratches 
+			[
+				- move the last node to be the root.
+					then we will put it down in its correct place according to its value 
+				- compare left and right child and get the smallest one
+				- if the node value bigger then
+					swap 
+				- repeat untill there's no left child.
+				- return the deleted node
+			]
+			SeudoCode 
+			[
+				Delete();
+				- i = 0
+				- data = array[i]
+				- array[i] = array[size - 1]
+				- array[size - 1] = null;
+				- size--;
+				- leftIndex = (2 * i) + 1;
+				- while(leftIndex < size)
+					- rightIndex = (2 * 1) + 2;
+					- smallerIndex = leftIndex;
+					- if (array[rightIndex] < array[leftIndex])
+						- samllerIndex = rightIndex
+					- if (array[smallerIndex] >= array[i])
+						- break;
+
+					- swap 
+						- temp = array[smallerIndex]
+						- array[smallerIndex] = temp
+						- i = smallerIndex
+						- leftIndex = (2 * i) + 1;
+				- return data;
+			]
