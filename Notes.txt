@@ -434,3 +434,145 @@
 						break;
 					else 
 						currentNode = currentNode.right
+		- Find(data)
+		currentNode = root;
+		while currentNode is not null
+			if data = currentNode.data
+				return currentNode
+			else if data < currentNode
+				currentNode = currentNode.left
+			else if data > currentNode
+				currentNode = currentNode.right
+		return null // if node not exist
+
+		- Find Node and Parent (done)
+
+
+		- Delete 
+			- node may be in three modes
+					[
+						1 - node is a leaf
+							if node.left && node.right are null
+							delete the node
+							return
+
+							SeudoCode
+							{
+								- find the node and its parent
+								- if the nodeToDelete.left is null and nodeToDelete.right is null 
+
+								- if the nodeToDelete is the left of its parent
+									- parent.left = null
+								- else
+									- parent.right = null;
+							}
+
+					]
+					[
+						2 - node has one child
+							if node.left XOR node.right is null
+							replace the node by its child
+							return
+
+							SeudoCode
+							{
+								- find the node
+								- if nodeToDelete.left is null xor nodeToDelete.right is null => has one child
+
+								// replace the nodeToDelete by its child
+								nodeToReplace = nodeToDelete.left or nodeToDelete.right
+								nodeToDelete.left = nodeToReplace.left
+								nodeToDelete.right = nodeToReplace.right
+								nodeToDelete.data = nodeToReplace.data
+								return
+							}
+					]
+
+					[
+						3 - node has two childs
+							if node.left && node.right are not null
+							replace the node by the smallest node in the right sub tree (the successive number in the InOrder Tree)
+							(InOrder tree is the tree with the ascending order of the binary search tree)
+							return
+
+							Scratches 
+							{
+								- find the node
+								- if the node.left and node.right are not null
+								- find the smallest node in the right subtree and its parent
+									(in other words, find the next node that comes after the node to delete in terms of data value)
+								- move to right node
+									- check if the node has left node (it must be smaller)
+									- if left not null then
+										- make parent equal currentrNode
+										- make currentNode equal the left node of currentNode
+											repeat 1 and 2 until left is null
+								- assign the data of the smallest node to the node to delete.
+
+								- if the node to delete is the parent of the smallest node
+									just make the right of the node to delete is the right of the smallest node
+									delete the node.
+
+								- if the node to delete is not the parent of the smallest node
+									then parent.left (smallest node) will be the smallest node.right (null)
+									delete the node.
+
+								- if the smallest node has right node
+									make node.right = parent.left 
+							}
+
+							SuedoCode
+							{
+								Delete(node) Node has two childs
+									- find the node
+									- if nodeToDelete.left && nodeToDelete.Right are not null //case 3
+									- currentNode = nodeToDelete.right //move to the right
+									- parentOfSmallest = null
+									while (currentNode.left is not null) //get smallest in the right sub tree
+										- parentOfSmallest = currentNode
+										- currentNode = currentNode.left
+									- nodeToDelete.data = currentNode.data
+									- if parentOfSmallest is null //parentOfSmallest == currentNode (nodeToDelete)
+										- nodeToDelete.right = currentNode.right
+									- else 
+										- parentOfSmallest.left = currentNode.right	
+									- delete smallestNode
+							}
+					]
+
+
+		- Balanced BS tree
+			balanced BS tree is sufficient in operations (Log N)more than linkedlist 
+			- turn unbalanced tree into balanced BS tree
+			- In Order traversal will list all nodes in a sorted way
+				we can use it to save all nodes data sorted in array.
+
+			- Calculate the mid index and make it the Root.
+			- then recursvly divide the array into left and right,
+				the recursive function will accept a part of the array and return subtree
+				so, for each node:
+					- divide the part of array into two parts
+					- node.left will equal a new recursive call with left part of array
+					- node.right will equal a new recursive call with right part of array 
+			Suedo Code
+			{
+				Balance();
+					nodes[]
+					InOrderToArray(root, nodes)
+					root = recursiveBalance(0,nodes.length - 1, nodes)
+
+				InOrderToArray(node, nodes)
+					if node == null return;
+					InOrderToArray(node.left, nodes)
+					nodes.add(node.data)
+					InOrderToArray(node.right, nodes)
+
+				recursiveBalance(start, end, nodes)
+					if (start > end) return null;
+					int mide = (start + end) / 2;
+					create newNode
+					newNode.data = nodes[mid];
+					newNodeleft = recursiveBalance(start, mid - 1, nodes)
+					newNodeRight = recursiveBalance(mide + 1, end, nodes)
+					return newNode;
+			}
